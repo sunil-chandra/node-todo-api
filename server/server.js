@@ -9,6 +9,8 @@ var { User } = require('./models/user');
 // Initialize Express App
 var app = express();
 
+const port = process.env.PORT || 3000;
+
 // Intercept request via Bodyparser to convert to JSON
 app.use(bodyParser.json());
 
@@ -53,8 +55,8 @@ app.get('/todos/:id', (req, res) => {
 });
 
 // Initialize server and start listening on port 3000
-app.listen(3000, () => {
-    console.log('Started server on port 3000');
+app.listen(port, () => {
+    console.log(`Started server on port ${port}`);
 });
 
 // Export app for Mocha testing
