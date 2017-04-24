@@ -1,8 +1,13 @@
+// Set all configurations 
+require('./config/config');
+
+// Global module imports
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
 const { ObjectID } = require('mongodb');
 
+// Local modules imports
 var { mongoose } = require('./db/mongoose.js');
 var { Todo } = require('./models/todo');
 var { User } = require('./models/user');
@@ -77,8 +82,6 @@ app.delete('/todos/:id', (req, res) => {
 app.patch('/todos/:id', (req, res) => {
     var id = req.params.id;
     var body = _.pick(req.body, ['text', 'completed']);
-
-    console.log(body);
 
     if (!ObjectID.isValid(id)) {
         return res.status(404).send();
