@@ -54,6 +54,27 @@ app.get('/todos/:id', (req, res) => {
     });
 });
 
+// Route for Removing a particular todo
+app.delete('/todos/:id', (req, res) => {
+    var id = req.params.id;
+
+    if (!ObjectID.isValid(id)) {
+        return res.status(404).send();
+    }
+    // validate id using isValid
+    Todo.findByIdAndRemove(id).then((todo) => {
+        if (!todo) {
+            return res.status(404).send();
+        }
+        res.send({ todo });
+    }).catch((e) => {
+        res.status(400).send();
+    });
+});
+
+// Remove all todos
+//app.delete()
+
 // Initialize server and start listening on port 3000
 app.listen(port, () => {
     console.log(`Started server on port ${port}`);
